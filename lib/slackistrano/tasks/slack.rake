@@ -11,62 +11,56 @@ namespace :slack do
     end
 
     task :starting do
-      if fetch(:slack_run_starting)
-        run_locally do
-          Slackistrano.post(
-            team: fetch(:slack_team),
-            token: fetch(:slack_token),
-            webhook: fetch(:slack_webhook),
-            via_slackbot: fetch(:slack_via_slackbot),
-            payload: {
-              channel: fetch(:slack_channel_starting) || fetch(:slack_channel),
-              username: fetch(:slack_username),
-              icon_url: fetch(:slack_icon_url),
-              icon_emoji: fetch(:slack_icon_emoji),
-              attachments: make_attachments(:starting)
-            }
-          )
-        end
+      run_locally do
+        Slackistrano.post(
+          team: fetch(:slack_team),
+          token: fetch(:slack_token),
+          webhook: fetch(:slack_webhook),
+          via_slackbot: fetch(:slack_via_slackbot),
+          payload: {
+            channel: fetch(:slack_channel_starting) || fetch(:slack_channel),
+            username: fetch(:slack_username),
+            icon_url: fetch(:slack_icon_url),
+            icon_emoji: fetch(:slack_icon_emoji),
+            attachments: make_attachments(:starting)
+          }
+        )
       end
     end
 
     task :finished do
-      if fetch(:slack_run_finished)
-        run_locally do
-          Slackistrano.post(
-            team: fetch(:slack_team),
-            token: fetch(:slack_token),
-            webhook: fetch(:slack_webhook),
-            via_slackbot: fetch(:slack_via_slackbot),
-            payload: {
-              channel: fetch(:slack_channel_finished) || fetch(:slack_channel),
-              username: fetch(:slack_username),
-              icon_url: fetch(:slack_icon_url),
-              icon_emoji: fetch(:slack_icon_emoji),
-              attachments: make_attachments(:finished, color: 'good')
-            }
-          )
-        end
+      run_locally do
+        Slackistrano.post(
+          team: fetch(:slack_team),
+          token: fetch(:slack_token),
+          webhook: fetch(:slack_webhook),
+          via_slackbot: fetch(:slack_via_slackbot),
+          payload: {
+            channel: fetch(:slack_channel_finished) || fetch(:slack_channel),
+            username: fetch(:slack_username),
+            icon_url: fetch(:slack_icon_url),
+            icon_emoji: fetch(:slack_icon_emoji),
+            attachments: make_attachments(:finished, color: 'good')
+          }
+        )
       end
     end
 
     task :failed do
-      if fetch(:slack_run_failed)
-        run_locally do
-          Slackistrano.post(
-            team: fetch(:slack_team),
-            token: fetch(:slack_token),
-            webhook: fetch(:slack_webhook),
-            via_slackbot: fetch(:slack_via_slackbot),
-            payload: {
-              channel: fetch(:slack_channel_failed) || fetch(:slack_channel),
-              username: fetch(:slack_username),
-              icon_url: fetch(:slack_icon_url),
-              icon_emoji: fetch(:slack_icon_emoji),
-              attachments: make_attachments(:failed, color: 'danger')
-            }
-          )
-        end
+      run_locally do
+        Slackistrano.post(
+          team: fetch(:slack_team),
+          token: fetch(:slack_token),
+          webhook: fetch(:slack_webhook),
+          via_slackbot: fetch(:slack_via_slackbot),
+          payload: {
+            channel: fetch(:slack_channel_failed) || fetch(:slack_channel),
+            username: fetch(:slack_username),
+            icon_url: fetch(:slack_icon_url),
+            icon_emoji: fetch(:slack_icon_emoji),
+            attachments: make_attachments(:failed, color: 'danger')
+          }
+        )
       end
     end
 
